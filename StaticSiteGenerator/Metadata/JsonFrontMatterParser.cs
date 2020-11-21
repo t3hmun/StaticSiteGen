@@ -7,6 +7,7 @@
     {
         public static Metadata Parse(string json)
         {
+            if (string.IsNullOrWhiteSpace(json)) return new Metadata(null, null, null, null);
             var options = new JsonSerializerOptions {AllowTrailingCommas = true, PropertyNameCaseInsensitive = true};
             var frontMatter = JsonSerializer.Deserialize<Metadata>(json, options);
             if (frontMatter == null)
@@ -57,6 +58,6 @@
             return finalBraceIndex;
         }
 
-        public record Metadata (string? Description, string? Title, DateTime? Timestamp);
+        public record Metadata (string? Description, string? Title, DateTime? Timestamp, string? ShortUrl);
     }
 }
