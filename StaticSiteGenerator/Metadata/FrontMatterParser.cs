@@ -15,7 +15,7 @@
         }
 
         /// <summary>
-        /// Extracts the json 
+        ///     Extracts the json
         /// </summary>
         /// <param name="markdown">The markdown file content.</param>
         /// <returns>The index of the final character of the json front matter, -1 if there is none.</returns>

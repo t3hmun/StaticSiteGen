@@ -2,22 +2,28 @@
 {
     using System;
     using System.Globalization;
+    using System.Text.RegularExpressions;
 
     public static class FileNameParser
     {
+        private static readonly Regex FileNameRegex =
+            new(@"^(\d\d\d\d-\d\d-\d\d)(-\d\d)?-(.*).md$", RegexOptions.Compiled);
+
         public static FileNameMetadata Parse(string fileName)
         {
-            if (fileName.Length < 15)
+            Match? match = FileNameRegex.Match(fileName);
+            if (!match.Success)
                 throw new MetadataParseException(
-                    $"{nameof(fileName)}: `{fileName}` is too short to match yyyy-mm-dd-title.md format.");
-            if (!fileName.EndsWith(".md"))
-                throw new MetadataParseException($"{nameof(fileName)}: `{fileName}` does not end with .md as expected");
+                    $"Filename did not match required format. Filename: {fileName}, Regex: {FileNameRegex}");
 
-            string dateText = fileName.Substring(0, 10);
-            string titleText = fileName.Substring(11, fileName.Length - 14);
-            DateTime timestamp = DateTime.ParseExact(dateText, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            string date = match.Groups[1].Value;
+            string time = match.Groups[2].Value;
+            string title = match.Groups[3].Value;
 
-            return new FileNameMetadata(fileName, timestamp, titleText);
+            string dateTimeFormat = "yyyy-MM-dd";
+            DateTime timestamp = DateTime.ParseExact(date, dateTimeFormat, CultureInfo.InvariantCulture);
+            if (!string.IsNullOrEmpty(time)) timestamp = timestamp.AddHours(int.Parse(time));
+            return new FileNameMetadata(fileName, timestamp, title);
         }
 
         public interface IFileMetadata
