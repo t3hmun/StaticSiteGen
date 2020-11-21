@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticSiteGenerator", "StaticSiteGenerator\StaticSiteGenerator.csproj", "{B42B72C6-2C89-4B62-80DE-B4CB2ED54E00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticSiteGenerator.Tests", "StaticSiteGenerator.Tests\StaticSiteGenerator.Tests.csproj", "{EE3A26B8-1918-44A4-8972-FAAB9C5BE425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{B42B72C6-2C89-4B62-80DE-B4CB2ED54E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B42B72C6-2C89-4B62-80DE-B4CB2ED54E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B42B72C6-2C89-4B62-80DE-B4CB2ED54E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3A26B8-1918-44A4-8972-FAAB9C5BE425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3A26B8-1918-44A4-8972-FAAB9C5BE425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3A26B8-1918-44A4-8972-FAAB9C5BE425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3A26B8-1918-44A4-8972-FAAB9C5BE425}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

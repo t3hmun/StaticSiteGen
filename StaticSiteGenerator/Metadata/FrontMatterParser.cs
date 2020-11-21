@@ -14,29 +14,35 @@
             return frontMatter;
         }
 
-        public static string? GetJsonFrontMatterOrNull(string markdown)
+        /// <summary>
+        /// Extracts the json 
+        /// </summary>
+        /// <param name="markdown">The markdown file content.</param>
+        /// <returns>The index of the final character of the json front matter, -1 if there is none.</returns>
+        /// <exception cref="MetadataParseException">It thinks it found json but then ran into trouble.</exception>
+        public static int IndexOfJsonFrontMatterFinalChar(string markdown)
         {
-            if (!markdown.TrimStart(' ', '\n').StartsWith("{")) return null;
+            if (!markdown.TrimStart(' ', '\n').StartsWith("{")) return -1;
             int first = markdown.IndexOf('{');
-            int braces = 0;
-            int final = 0;
+            int openBraces = 0;
+            int finalBraceIndex = 0;
             bool escaped = false;
-            bool inQuotes = false;
+            bool withinQuotes = false;
             for (int i = first; i < markdown.Length; i++)
             {
                 char current = markdown[i];
 
-                if (!escaped && current == '"') inQuotes = !inQuotes;
+                if (!escaped && current == '"') withinQuotes = !withinQuotes;
 
-                if (!inQuotes)
+                if (!withinQuotes)
                 {
-                    if (current == '{') braces++;
-                    else if (current == '}') braces--;
+                    if (current == '{') openBraces++;
+                    else if (current == '}') openBraces--;
                 }
 
-                if (braces == 0)
+                if (openBraces == 0)
                 {
-                    final = i;
+                    finalBraceIndex = i;
                     break;
                 }
 
@@ -44,10 +50,10 @@
                 else escaped = false;
             }
 
-            // If the json never terminated then it isn't json.
-            if (final == 0) return null;
-            string json = markdown.Substring(first, final - first);
-            return json;
+            if (finalBraceIndex == 0)
+                throw new MetadataParseException(
+                    $"Tried to extract invalid JsonBlock, ended with {openBraces} open braces.");
+            return finalBraceIndex;
         }
 
         public interface IFrontMatter
