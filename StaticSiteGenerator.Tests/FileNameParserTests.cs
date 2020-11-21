@@ -11,8 +11,8 @@ namespace t3hmun.StaticSiteGenerator.Tests
         [InlineData("2016-09-26-X.md", 2016, 09, 26, "X")]
         public void FileNameShouldParse(string fileName, int year, int month, int day, string title)
         {
-            var expected = new FileNameParser.FileNameMetadata(fileName, new DateTime(year, month, day), title);
-            FileNameParser.FileNameMetadata actual = FileNameParser.Parse(fileName);
+            var expected = new FileNameParser.Metadata(fileName, new DateTime(year, month, day), title);
+            FileNameParser.Metadata actual = FileNameParser.Parse(fileName);
             Assert.Equal(expected, actual);
         }
     }

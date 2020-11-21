@@ -24,7 +24,7 @@
         {
             string expected = "{\"key\":\"" + value + "\"}";
             string markdown = expected + content;
-            int finalCharIndex = FrontMatterParser.IndexOfJsonFrontMatterFinalChar(markdown);
+            int finalCharIndex = JsonFrontMatterParser.IndexOfFrontMatterFinalChar(markdown);
             string actual = markdown.Substring(0, finalCharIndex + 1);
             actual.Should().Be(expected, because);
         }

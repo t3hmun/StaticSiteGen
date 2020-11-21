@@ -1,13 +1,14 @@
 ﻿namespace t3hmun.StaticSiteGenerator.Metadata
 {
+    using System;
     using System.Text.Json;
 
-    public static class FrontMatterParser
+    public static class JsonFrontMatterParser
     {
-        public static JsonFrontMatter ParseJsonFrontMatter(string json)
+        public static Metadata Parse(string json)
         {
             var options = new JsonSerializerOptions {AllowTrailingCommas = true, PropertyNameCaseInsensitive = true};
-            var frontMatter = JsonSerializer.Deserialize<JsonFrontMatter>(json, options);
+            var frontMatter = JsonSerializer.Deserialize<Metadata>(json, options);
             if (frontMatter == null)
                 throw new MetadataParseException(
                     $"Front matter json deserialize returned null, {nameof(json)}: `{json}`");
@@ -20,7 +21,7 @@
         /// <param name="markdown">The markdown file content.</param>
         /// <returns>The index of the final character of the json front matter, -1 if there is none.</returns>
         /// <exception cref="MetadataParseException">It thinks it found json but then ran into trouble.</exception>
-        public static int IndexOfJsonFrontMatterFinalChar(string markdown)
+        public static int IndexOfFrontMatterFinalChar(string markdown)
         {
             if (!markdown.TrimStart(' ', '\n').StartsWith("{")) return -1;
             int first = markdown.IndexOf('{');
@@ -56,14 +57,6 @@
             return finalBraceIndex;
         }
 
-        public interface IFrontMatter
-        {
-            string? FrontMatterDescription { get; }
-            string? FrontMatterTitle { get; }
-            string? FrontMatterTime { get; }
-        }
-
-        public record JsonFrontMatter (string? FrontMatterDescription, string? FrontMatterTitle,
-            string? FrontMatterTime);
+        public record Metadata (string? Description, string? Title, DateTime? Timestamp);
     }
 }

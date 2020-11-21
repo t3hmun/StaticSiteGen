@@ -20,8 +20,8 @@
         [InlineData("\n\n\n" + HashHeader + ContentHashH2, "valid preceded by many newlines")]
         public void FindsHashH1WithHashH2(string content, string because)
         {
-            ContentMetadataParser.ContentMetadata result = ContentMetadataParser.ParseContentMetadata(content);
-            var expected = new ContentMetadataParser.ContentMetadata(HeaderText, null);
+            ContentMetadataParser.Metadata result = ContentMetadataParser.Parse(content);
+            var expected = new ContentMetadataParser.Metadata(HeaderText, null);
             result.Should().Be(expected, because);
         }
 
@@ -31,8 +31,8 @@
         [InlineData("\n\n\n" + EqHeader + ContentHashH2, "valid preceded by many newlines")]
         public void FindsEqH1WithHashH2(string content, string because)
         {
-            ContentMetadataParser.ContentMetadata result = ContentMetadataParser.ParseContentMetadata(content);
-            var expected = new ContentMetadataParser.ContentMetadata(HeaderText, null);
+            ContentMetadataParser.Metadata result = ContentMetadataParser.Parse(content);
+            var expected = new ContentMetadataParser.Metadata(HeaderText, null);
             result.Should().Be(expected, because);
         }
 
@@ -42,8 +42,8 @@
         [InlineData("\n\n\n" + EqHeader + ContentDashH2, "valid preceded by many newlines")]
         public void FindsEqH1WithDashH2(string content, string because)
         {
-            ContentMetadataParser.ContentMetadata result = ContentMetadataParser.ParseContentMetadata(content);
-            var expected = new ContentMetadataParser.ContentMetadata(HeaderText, null);
+            ContentMetadataParser.Metadata result = ContentMetadataParser.Parse(content);
+            var expected = new ContentMetadataParser.Metadata(HeaderText, null);
             result.Should().Be(expected, because);
         }
 
@@ -54,8 +54,8 @@
         [InlineData("\n\n\n" + HashHeader + ContentDashH2, "valid preceded by many newlines")]
         public void FindsHashH1WithDashH2(string content, string because)
         {
-            ContentMetadataParser.ContentMetadata result = ContentMetadataParser.ParseContentMetadata(content);
-            var expected = new ContentMetadataParser.ContentMetadata(HeaderText, null);
+            ContentMetadataParser.Metadata result = ContentMetadataParser.Parse(content);
+            var expected = new ContentMetadataParser.Metadata(HeaderText, null);
             result.Should().Be(expected, because);
         }
 
@@ -67,8 +67,8 @@
             "immediate multiline description")]
         public void FindsHasH1AndDescriptionHashH2(string content, string description, string because)
         {
-            ContentMetadataParser.ContentMetadata result = ContentMetadataParser.ParseContentMetadata(content);
-            var expected = new ContentMetadataParser.ContentMetadata("The Title", description);
+            ContentMetadataParser.Metadata result = ContentMetadataParser.Parse(content);
+            var expected = new ContentMetadataParser.Metadata("The Title", description);
             result.Should().Be(expected, because);
         }
     }
