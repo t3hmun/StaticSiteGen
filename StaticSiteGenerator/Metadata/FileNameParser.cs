@@ -26,14 +26,6 @@
             return new FileNameMetadata(fileName, timestamp, title);
         }
 
-        public interface IFileMetadata
-        {
-            string FileName { get; }
-            DateTime Timestamp { get; }
-            string FileNameTitle { get; }
-        }
-
-        public sealed record FileNameMetadata
-            (string FileName, DateTime Timestamp, string FileNameTitle) : IFileMetadata;
+        public record FileNameMetadata (string FileName, DateTime Timestamp, string FileNameTitle);
     }
 }

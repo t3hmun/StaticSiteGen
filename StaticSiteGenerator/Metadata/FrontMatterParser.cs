@@ -4,7 +4,7 @@
 
     public static class FrontMatterParser
     {
-        public static IFrontMatter ParseJsonFrontMatter(string json)
+        public static JsonFrontMatter ParseJsonFrontMatter(string json)
         {
             var options = new JsonSerializerOptions {AllowTrailingCommas = true, PropertyNameCaseInsensitive = true};
             var frontMatter = JsonSerializer.Deserialize<JsonFrontMatter>(json, options);
@@ -63,7 +63,7 @@
             string? FrontMatterTime { get; }
         }
 
-        private record JsonFrontMatter (string? FrontMatterDescription, string? FrontMatterTitle,
-            string? FrontMatterTime) : IFrontMatter;
+        public record JsonFrontMatter (string? FrontMatterDescription, string? FrontMatterTitle,
+            string? FrontMatterTime);
     }
 }
