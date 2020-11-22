@@ -41,7 +41,7 @@
             ContentMetadataParser.Metadata contentMetadata = ContentMetadataParser.Parse(markdown);
 
             string title = frontMatterMetadata.Title ?? contentMetadata.Title ?? filenameMetadata.Title;
-            string? description = frontMatterMetadata.Description ?? contentMetadata.Description;
+            string? mdDescription = frontMatterMetadata.MarkdownDescription ?? contentMetadata.MarkdownDescription;
             DateTime timestamp = frontMatterMetadata.Timestamp ?? filenameMetadata.Timestamp;
 
             string shortUrl = frontMatterMetadata.ShortUrl ?? UrlCleanRegex.Replace(title, "");
@@ -50,6 +50,7 @@
             string markdownWithTitle = contentMetadata.Title == null ? $"# {title}\n\n{markdown}" : markdown;
 
             string html = markdownParser.ParseToHtml(markdownWithTitle);
+            string description = mdDescription == null ? "" : markdownParser.ParseToHtml(mdDescription);
 
             return new Article(title, timestamp, description, shortUrl, html);
         }

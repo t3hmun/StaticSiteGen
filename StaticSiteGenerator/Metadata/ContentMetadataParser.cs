@@ -21,6 +21,6 @@
             return new Metadata(title, description);
         }
 
-        public record Metadata (string? Title, string? Description);
+        public record Metadata (string? Title, string? MarkdownDescription);
     }
 }

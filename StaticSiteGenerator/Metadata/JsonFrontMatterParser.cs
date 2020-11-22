@@ -59,6 +59,6 @@
             return finalBraceIndex;
         }
 
-        public record Metadata (string? Description, string? Title, DateTime? Timestamp, string? ShortUrl);
+        public record Metadata (string? MarkdownDescription, string? Title, DateTime? Timestamp, string? ShortUrl);
     }
 }
