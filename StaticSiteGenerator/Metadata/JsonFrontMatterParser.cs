@@ -3,6 +3,7 @@
     using System;
     using System.Text.Json;
 
+    /// <summary>Extracts metadata from the Json front matter.</summary>
     public static class JsonFrontMatterParser
     {
         public static Metadata Parse(string json)

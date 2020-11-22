@@ -2,6 +2,7 @@
 {
     using System.Text.RegularExpressions;
 
+    /// <summary>Extracts metadata from the content of the markdown file.</summary>
     public static class ContentMetadataParser
     {
         /// <summary>Regex is easy.</summary>

@@ -5,6 +5,7 @@
     using System.Text.RegularExpressions;
     using t3hmun.StaticSiteGenerator.Metadata;
 
+    /// <summary>The html output of the article metadata - only the html of the article, not responsible for the website layout of the page.</summary>
     public class Article
     {
         private static readonly Regex UrlCleanRegex = new(@"[^\w\.@-]", RegexOptions.Compiled);

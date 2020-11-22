@@ -4,6 +4,7 @@
     using System.Globalization;
     using System.Text.RegularExpressions;
 
+    /// <summary>Extracts metadata from the filename.</summary>
     public static class FileNameParser
     {
         private static readonly Regex FileNameRegex =
