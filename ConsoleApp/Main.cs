@@ -12,13 +12,13 @@ string outputDirPath = args[1];
 Console.WriteLine($"Input: {inputDirPath}");
 Console.WriteLine($"Output: {outputDirPath}");
 
-DirectoryInfo postsFolder = new(inputDirPath);
-FileInfo[] postFiles = postsFolder.GetFiles("*.md");
+DirectoryInfo articlesDir = new(inputDirPath);
+FileInfo[] articleFiles = articlesDir.GetFiles("*.md");
 MarkdownParser parser = new();
-Post[] posts = postFiles.Select(file => Post.LoadPost(file.FullName, parser)).ToArray();
+Article[] articles = articleFiles.Select(file => Article.CreateFromFile(file.FullName, parser)).ToArray();
 
-foreach (Post post in posts)
+foreach (Article article in articles)
 {
-    string outputPath = Path.Combine(outputDirPath, post.ShortUrl + ".html");
-    File.WriteAllText(outputPath, post.Html, Encoding.UTF8);
+    string outputPath = Path.Combine(outputDirPath, article.ShortUrl + ".html");
+    File.WriteAllText(outputPath, article.Html, Encoding.UTF8);
 }

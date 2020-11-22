@@ -5,11 +5,11 @@
     using System.Text.RegularExpressions;
     using t3hmun.StaticSiteGenerator.Metadata;
 
-    public class Post
+    public class Article
     {
         private static readonly Regex UrlCleanRegex = new(@"[^\w\.@-]", RegexOptions.Compiled);
 
-        private Post(string title, in DateTime timestamp, string? description, string shortUrl, string html)
+        private Article(string title, in DateTime timestamp, string? description, string shortUrl, string html)
         {
             Title = title;
             Timestamp = timestamp;
@@ -24,7 +24,7 @@
         public string ShortUrl { get; }
         public string Html { get; }
 
-        public static Post LoadPost(string filepath, MarkdownParser? markdownParser = null)
+        public static Article CreateFromFile(string filepath, MarkdownParser? markdownParser = null)
         {
             markdownParser ??= new MarkdownParser();
 
@@ -50,7 +50,7 @@
 
             string html = markdownParser.ParseToHtml(markdownWithTitle);
 
-            return new Post(title, timestamp, description, shortUrl, html);
+            return new Article(title, timestamp, description, shortUrl, html);
         }
     }
 }

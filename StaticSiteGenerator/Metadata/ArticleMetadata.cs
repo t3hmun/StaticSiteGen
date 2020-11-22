@@ -2,7 +2,7 @@
 {
     using System;
 
-    public record PostMetadata
+    public record ArticleMetadata
     {
         public string Title { get; init; }
         public DateTime Timestamp { get; init; }
