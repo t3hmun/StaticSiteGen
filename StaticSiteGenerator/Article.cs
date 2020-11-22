@@ -5,25 +5,30 @@
     using System.Text.RegularExpressions;
     using t3hmun.StaticSiteGenerator.Metadata;
 
-    /// <summary>The html output of the article metadata - only the html of the article, not responsible for the website layout of the page.</summary>
+    /// <summary>
+    ///     The html output of the article metadata - only the html of the article, not responsible for the website layout
+    ///     of the page.
+    /// </summary>
     public class Article
     {
         private static readonly Regex UrlCleanRegex = new(@"[^\w\.@-]", RegexOptions.Compiled);
 
-        private Article(string title, in DateTime timestamp, string? description, string shortUrl, string html)
+        private Article(string title, in DateTime timestamp, string? descriptionHtml, string shortUrl,
+            string articleHtml)
         {
             Title = title;
             Timestamp = timestamp;
-            Description = description;
+            DescriptionHtml = descriptionHtml;
             ShortUrl = shortUrl;
-            Html = html;
+            ArticleHtml = articleHtml;
         }
+
+        public string ArticleHtml { get; }
 
         public string Title { get; }
         public DateTime Timestamp { get; }
-        public string? Description { get; }
+        public string? DescriptionHtml { get; }
         public string ShortUrl { get; }
-        public string Html { get; }
 
         public static Article CreateFromFile(string filepath, MarkdownParser? markdownParser = null)
         {
