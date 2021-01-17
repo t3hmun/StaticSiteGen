@@ -1,3 +1,7 @@
+This was also a terrible idea. Makes waaaay more sense to do the whole thing with NodeJs.
+
+Abandoned.
+
 # StaticSiteGen
 
 * Generate html from markdown using many markdig extensions
